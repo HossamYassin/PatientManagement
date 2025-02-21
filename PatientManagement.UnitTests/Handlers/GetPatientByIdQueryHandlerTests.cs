@@ -17,7 +17,7 @@ namespace PatientManagement.UnitTests.Handlers
     public class GetPatientByIdQueryHandlerTests
     {
         private readonly Mock<IPatientRepository> _mockRepo;
-        private readonly GetPatientByIdCommandHandler _handler;
+        private readonly GetPatientByIdQueryHandler _handler;
         private readonly Mock<IMapper> _mockMapper;
 
         public GetPatientByIdQueryHandlerTests()
@@ -25,7 +25,7 @@ namespace PatientManagement.UnitTests.Handlers
             _mockRepo = new Mock<IPatientRepository>();
             _mockMapper = new Mock<IMapper>();
 
-            _handler = new GetPatientByIdCommandHandler(_mockRepo.Object, _mockMapper.Object);
+            _handler = new GetPatientByIdQueryHandler(_mockRepo.Object, _mockMapper.Object);
         }
 
         [Fact]

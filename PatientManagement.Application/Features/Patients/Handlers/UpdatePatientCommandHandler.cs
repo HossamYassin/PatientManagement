@@ -18,14 +18,14 @@ namespace PatientManagement.Application.Features.Patients.Handlers
         {
             var patient = new Patient
             {
-                Id = request.Id,
-                Email = request.Email,
-                FullName = request.FullName,
-                DateOfBirth = request.DateOfBirth,
-                Street = request.Street,
-                City = request.City,
-                State = request.State,
-                ZipCode = request.ZipCode
+                Id = request.Patient.Id,
+                Email = request.Patient.Email,
+                FullName = request.Patient.FullName,
+                DateOfBirth = request.Patient.DateOfBirth,
+                Street = request.Patient.Street,
+                City = request.Patient.City,
+                State = request.Patient.State,
+                ZipCode = request.Patient.ZipCode
             };
 
             return await _patientRepository.UpdateAsync(patient);

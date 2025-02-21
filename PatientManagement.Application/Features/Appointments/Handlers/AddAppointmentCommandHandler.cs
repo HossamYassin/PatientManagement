@@ -6,12 +6,12 @@ using PatientManagement.Domain.Entities;
 
 namespace PatientManagement.Application.Features.Appointments.Handlers
 {
-    public class AddAppointmentHandler : IRequestHandler<AddAppointmentCommand, int>
+    public class AddAppointmentCommandHandler : IRequestHandler<AddAppointmentCommand, int>
     {
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IMapper _mapper;
 
-        public AddAppointmentHandler(IAppointmentRepository appointmentRepository, IMapper mapper)
+        public AddAppointmentCommandHandler(IAppointmentRepository appointmentRepository, IMapper mapper)
         {
             _appointmentRepository = appointmentRepository;
             _mapper = mapper;

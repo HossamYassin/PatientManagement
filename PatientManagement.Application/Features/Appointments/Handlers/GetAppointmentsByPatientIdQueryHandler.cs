@@ -6,12 +6,12 @@ using PatientManagement.Application.Features.Appointments.Queries;
 
 namespace PatientManagement.Application.Features.Appointments.Handlers
 {
-    public class GetAppointmentsByPatientIdHandler : IRequestHandler<GetAppointmentsByPatientIdQuery, List<AppointmentDto>>
+    public class GetAppointmentsByPatientIdQueryHandler : IRequestHandler<GetAppointmentsByPatientIdQuery, List<AppointmentDto>>
     {
         private readonly IAppointmentRepository _appointmentRepository;
         private readonly IMapper _mapper;
 
-        public GetAppointmentsByPatientIdHandler(IAppointmentRepository appointmentRepository, IMapper mapper)
+        public GetAppointmentsByPatientIdQueryHandler(IAppointmentRepository appointmentRepository, IMapper mapper)
         {
             _appointmentRepository = appointmentRepository;
             _mapper = mapper;

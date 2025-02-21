@@ -50,11 +50,11 @@ namespace PatientManagement.WebAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdatePatientCommand command)
+        public async Task<IActionResult> Update(int id, [FromBody] PatientDto patient)
         {
-            if (id != command.Id) return BadRequest("ID mismatch.");
+            if (id != patient.Id) return BadRequest("ID mismatch.");
 
-            bool isUpdated = await _mediator.Send(command);
+            bool isUpdated = await _mediator.Send(new UpdatePatientCommand(patient));
             if (!isUpdated) return NotFound("Patient not found.");
 
             return Ok();
