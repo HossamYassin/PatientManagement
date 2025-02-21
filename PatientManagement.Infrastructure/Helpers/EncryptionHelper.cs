@@ -5,8 +5,8 @@ namespace PatientManagement.Infrastructure.Helpers;
 public static class EncryptionHelper
 {
     // better to store in azure key vault
-    private static readonly string EncryptionKey = "wU9FqX67C7n5bsZf/q4Fz2tK1YYMgA1fFQ5kl8jYYxY=";  // Replace with your key
-    private static readonly string IV = "3XJjC5Fi2tmAswD9g5/m9A==";  // Replace with your IV
+    private static readonly string EncryptionKey = "wU9FqX67C7n5bsZf/q4Fz2tK1YYMgA1fFQ5kl8jYYxY=";  
+    private static readonly string IV = "3XJjC5Fi2tmAswD9g5/m9A=="; 
 
     public static string Encrypt(string plainText)
     {
