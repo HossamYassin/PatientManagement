@@ -6,12 +6,12 @@ using PatientManagement.Application.Features.Patients.Queries;
 
 namespace PatientManagement.Application.Features.Patients.Handlers
 {
-    public class GetPatientByIdHandler : IRequestHandler<GetPatientByIdQuery, PatientDto?>
+    public class GetPatientByIdCommandHandler : IRequestHandler<GetPatientByIdQuery, PatientDto?>
     {
         private readonly IPatientRepository _patientRepository;
         private readonly IMapper _mapper;
 
-        public GetPatientByIdHandler(IPatientRepository patientRepository, IMapper mapper)
+        public GetPatientByIdCommandHandler(IPatientRepository patientRepository, IMapper mapper)
         {
             _patientRepository = patientRepository;
             _mapper = mapper;
