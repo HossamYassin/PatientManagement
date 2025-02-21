@@ -19,10 +19,7 @@ builder.Services.AddSwaggerGen();
 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
-    .Enrich.FromLogContext()
-    .Enrich.WithExceptionDetails() // Logs full exception details
-    .WriteTo.Console()
-    .WriteTo.File("logs/app-log.txt", rollingInterval: RollingInterval.Day) // Save logs to a file
+    .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
 
 // Use Serilog instead of default logger
