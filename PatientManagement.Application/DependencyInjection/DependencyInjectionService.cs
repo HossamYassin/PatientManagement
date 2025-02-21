@@ -2,9 +2,6 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using PatientManagement.Application.Behaviors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace PatientManagement.Application.DependencyInjection
