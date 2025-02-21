@@ -1,6 +1,8 @@
 using PatientManagement.Application.DependencyInjection;
 using PatientManagement.Infrastructure.DependencyInjection;
 using PatientManagement.WebAPI.Middlewares;
+using Serilog;
+using Serilog.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,17 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .Enrich.WithExceptionDetails() // Logs full exception details
+    .WriteTo.Console()
+    .WriteTo.File("logs/app-log.txt", rollingInterval: RollingInterval.Day) // Save logs to a file
+    .CreateLogger();
+
+// Use Serilog instead of default logger
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 

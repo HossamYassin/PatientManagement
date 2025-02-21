@@ -1,20 +1,19 @@
-﻿namespace PatientManagement.WebAPI.Middlewares
-{
-    using System.Net;
-    using System.Text.Json;
-    using FluentValidation;
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.Extensions.Logging;
+﻿using System.Net;
+using System.Text.Json;
+using FluentValidation;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
+namespace PatientManagement.WebAPI.Middlewares
+{
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<ExceptionMiddleware> _logger;
 
-        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
+        public ExceptionMiddleware(RequestDelegate next)
         {
             _next = next;
-            _logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -25,7 +24,7 @@
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An unhandled exception occurred.");
+                Log.Error(ex, "An unhandled exception occurred. Request Path: {RequestPath}", context.Request.Path);
                 await HandleExceptionAsync(context, ex);
             }
         }
@@ -71,5 +70,4 @@
         public string Message { get; set; } = string.Empty;
         public List<string>? Errors { get; set; }
     }
-
 }
