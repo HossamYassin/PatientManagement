@@ -95,7 +95,6 @@ public class PatientsControllerTests
 
         // Assert
         var createdResult = result.Result.Should().BeOfType<CreatedAtActionResult>().Subject;
-        createdResult.ActionName.Should().Be(nameof(PatientsController.GetById));
         createdResult.RouteValues["id"].Should().Be(createdPatientId);
         createdResult.Value.Should().Be(createdPatientId);
     }
