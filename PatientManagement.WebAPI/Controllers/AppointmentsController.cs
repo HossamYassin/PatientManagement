@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PatientManagement.Application.DTOs;
 using PatientManagement.Application.Features.Appointments.Commands;
@@ -6,6 +7,7 @@ using PatientManagement.Application.Features.Appointments.Queries;
 
 namespace PatientManagement.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AppointmentsController : ControllerBase
