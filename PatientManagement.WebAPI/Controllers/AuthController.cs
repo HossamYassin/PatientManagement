@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PatientManagement.Application.DTOs;
+using PatientManagement.WebAPI.Models;
 using PatientManagement.WebAPI.Services;
 
 namespace PatientManagement.WebAPI.Controllers
@@ -20,7 +22,8 @@ namespace PatientManagement.WebAPI.Controllers
             var token = _authService.Authenticate(request.Email, request.Password);
 
             if (token == null)
-                return Unauthorized(new { message = "Invalid credentials" });
+                return Unauthorized((new ApiResponse<List<AppointmentDto>>(
+                "fail", new List<string> { "Invalid credentials" })));
 
             return Ok(new { Token = token });
         }

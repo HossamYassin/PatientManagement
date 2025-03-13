@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using PatientManagement.Application.DTOs;
 using PatientManagement.Application.Features.Appointments.Commands;
 using PatientManagement.Application.Features.Appointments.Queries;
+using PatientManagement.Domain.Entities;
+using PatientManagement.WebAPI.Models;
 
 namespace PatientManagement.WebAPI.Controllers
 {
@@ -26,7 +28,10 @@ namespace PatientManagement.WebAPI.Controllers
         public async Task<ActionResult<List<AppointmentDto>>> GetByPatientId(int patientId)
         {
             var appointments = await _mediator.Send(new GetAppointmentsByPatientIdQuery(patientId));
-            return Ok(appointments);
+            
+            return Ok(new ApiResponse<List<AppointmentDto>>(
+                "success", appointments
+            ));
         }
 
         /// <summary>
@@ -36,9 +41,14 @@ namespace PatientManagement.WebAPI.Controllers
         public async Task<ActionResult<AppointmentDto>> GetById(int id)
         {
             var appointment = await _mediator.Send(new GetAppointmentByIdQuery(id));
+
             if (appointment == null)
-                return NotFound();
-            return Ok(appointment);
+                return NotFound(new ApiResponse<List<AppointmentDto>>(
+                "fail", new List<string> { "appointment does not exist" }));
+
+            return Ok(new ApiResponse<AppointmentDto>(
+                "success", appointment
+            ));
         }
 
         /// <summary>
@@ -48,7 +58,10 @@ namespace PatientManagement.WebAPI.Controllers
         public async Task<ActionResult<int>> Add([FromBody] AppointmentDto appointment)
         {
             var appointmentId = await _mediator.Send(new AddAppointmentCommand(appointment));
-            return CreatedAtAction(nameof(GetById), new { id = appointmentId }, appointmentId);
+
+            return CreatedAtAction(nameof(GetById), new ApiResponse<int>(
+                "success", appointmentId
+            ), appointmentId);
         }
     }
 }
