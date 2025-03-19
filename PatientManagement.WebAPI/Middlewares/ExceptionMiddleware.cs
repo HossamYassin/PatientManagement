@@ -3,6 +3,7 @@ using System.Text.Json;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using PatientManagement.WebAPI.Models;
 using Serilog;
 
 namespace PatientManagement.WebAPI.Middlewares
@@ -59,7 +60,8 @@ namespace PatientManagement.WebAPI.Middlewares
             };
 
             context.Response.StatusCode = response.StatusCode;
-            var jsonResponse = JsonSerializer.Serialize(response);
+            var responseResult = new ApiResponse<object>("Error, " + response.Message, response.Errors);
+            var jsonResponse = JsonSerializer.Serialize(responseResult);
             await context.Response.WriteAsync(jsonResponse);
         }
     }
